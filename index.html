@@ -1,90 +1,37 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-<meta charset="utf-8">  
-<title>聊天页面</title>  
-  
-<style>  
-body{  
-  margin:0;  
-  background:#ededed;  
-  font-family: Arial;  
-}  
-.chat{  
-  padding:15px;  
-}  
-.msg{  
-  display:flex;  
-  margin-bottom:15px;  
-}  
-.msg.left{ flex-direction:row; }  
-.msg.right{ flex-direction:row-reverse; }  
-  
-.avatar{  
-  width:40px;  
-  height:40px;  
-  border-radius:50%;  
-  cursor:pointer;  
-}  
-  
-.bubble{  
-  max-width:60%;  
-  padding:10px;  
-  border-radius:10px;  
-  margin:0 10px;  
-  font-size:14px;  
-}  
-  
-.left .bubble{ background:#fff; }  
-.right .bubble{ background:#95ec69; }  
-</style>  
-</head>  
-  
-<body>  
-  
-<div class="chat">  
-  
-  <div class="msg left">  
-    <img src="https://via.placeholder.com/40" class="avatar" onclick="goChat()">  
-    <div class="bubble">你好，这个可以了解一下吗？</div>  
-  </div>  
-  
-  <div class="msg right">  
-    <img src="https://via.placeholder.com/40" class="avatar" onclick="goChat()">  
-    <div class="bubble">可以的，主要是做推广项目</div>  
-  </div>  
-  
-  <div class="msg left">  
-    <img src="https://via.placeholder.com/40" class="avatar" onclick="goChat()">  
-    <div class="bubble">现在还能做吗？</div>  
-  </div>  
-  
-  <div class="msg right">  
-    <img src="https://via.placeholder.com/40" class="avatar" onclick="goChat()">  
-    <div class="bubble">可以，不过名额不多了</div>  
-  </div>  
-  
-</div>  
-  
-<script>  
-function goChat(){  
-  window.location.href = "https://t.me/你的用户名";  
-}  
-</script>  
-  
-<!-- Tawk.to -->  
-<script type="text/javascript">  
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();  
-(function(){  
-var s1=document.createElement("script"),  
-s0=document.getElementsByTagName("script")[0];  
-s1.async=true;  
-s1.src='https://embed.tawk.to/69e0945625e95a1c33c77e3d/default';  
-s1.charset='UTF-8';  
-s1.setAttribute('crossorigin','*');  
-s0.parentNode.insertBefore(s1,s0);  
-})();  
-</script>  
-  
-</body>  
-</html>  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分享页面</title>
+</head>
+
+<body style="font-family: Arial; padding: 15px; max-width: 600px; margin: auto; line-height: 1.6;">
+
+<!-- 标题 -->
+<h2 style="text-align: center;">最近在做的一些记录</h2>
+
+<!-- 简单说明 -->
+<p>这段时间在尝试一个新的方向，这里简单整理了一下过程，有兴趣可以看看。</p>
+
+<!-- 视频 -->
+<div style="margin:20px 0;">
+  <video width="100%" controls>
+    <source src="video.mp4" type="video/mp4">
+    你的浏览器不支持视频播放
+  </video>
+</div>
+
+<!-- 补充说明 -->
+<p>上面是一个简单过程记录，如果你也有兴趣，可以继续往下看。</p>
+
+<!-- 按钮 -->
+<div style="text-align:center; margin-top:30px;">
+  <a href="https://你的链接" 
+     style="display:inline-block;padding:12px 25px;background:#28a745;color:white;text-decoration:none;border-radius:8px;font-size:16px;">
+     继续了解
+  </a>
+</div>
+
+</body>
+</html>
