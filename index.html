@@ -50,11 +50,37 @@ margin-bottom:20px;
 </p>
 
 <!-- 视频 -->
-<div style="margin:20px 0;">
-  <video width="100%" controls style="border-radius:12px;">
+<div style="margin:20px 0; display:flex; justify-content:center;">
+  
+  <video 
+    id="myVideo"
+    muted
+    autoplay
+    loop
+    playsinline
+    webkit-playsinline
+    disablePictureInPicture
+    style="width:100%; max-width:600px; border-radius:12px; background:#000;"
+  >
     <source src="video.mp4" type="video/mp4">
   </video>
+
 </div>
+
+<script>
+  const video = document.getElementById('myVideo');
+
+  // 兼容 iOS / 安卓强制触发 autoplay
+  window.addEventListener('load', () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // 某些设备需要用户轻触才允许播放
+        console.log("Autoplay blocked, waiting user interaction");
+      });
+    }
+  });
+</script>
 
 <!-- 文案 -->
 <p style="
