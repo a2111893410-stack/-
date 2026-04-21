@@ -3,16 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>精品资源群</title>
+<title>风格</title>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6LY6CDTF5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-X6LY6CDTF5');
 </script>
+
+<style>
+  .video-wrap{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+
+  .heart-btn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:55px;
+    color:rgba(255,255,255,0.8);
+    cursor:pointer;
+    user-select:none;
+    transition:0.25s;
+    text-shadow:0 4px 15px rgba(0,0,0,0.4);
+  }
+
+  .heart-btn.active{
+    color:#ff2d55;
+    transform:translate(-50%,-50%) scale(1.25);
+  }
+
+  .heart-count{
+    position:absolute;
+    top:calc(50% + 45px);
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:14px;
+    background:rgba(0,0,0,0.4);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+</style>
 
 </head>
 
@@ -40,25 +77,16 @@ backdrop-filter: blur(12px);
 box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 ">
 
-<h2 style="
-text-align:center;
-margin-bottom:10px;
-font-size:22px;
-">
-精品资源群
+<h2 style="text-align:center;margin-bottom:10px;font-size:22px;">
+精品群
 </h2>
 
-<p style="
-text-align:center;
-color:#666;
-font-size:14px;
-margin-bottom:20px;
-">
-国内质量最好的资源群，所有类型都有
+<p style="text-align:center;color:#666;font-size:14px;margin-bottom:20px;">
+大家好
 </p>
 
-<div style="margin:20px 0; display:flex; justify-content:center;">
-  
+<div class="video-wrap">
+
   <video 
     id="myVideo"
     muted
@@ -72,20 +100,45 @@ margin-bottom:20px;
     <source src="video.mp4" type="video/mp4">
   </video>
 
+  <!-- ❤️ 红心点赞 -->
+  <div id="heartBtn" class="heart-btn">❤</div>
+  <div id="heartCount" class="heart-count">0</div>
+
 </div>
 
 <script>
   const video = document.getElementById('myVideo');
+  const heartBtn = document.getElementById('heartBtn');
+  const heartCount = document.getElementById('heartCount');
 
-  // 兼容 iOS / 安卓强制触发 autoplay
+  let liked = false;
+  let count = 0;
+
   window.addEventListener('load', () => {
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // 某些设备需要用户轻触才允许播放
-        console.log("Autoplay blocked, waiting user interaction");
-      });
+    video.play().catch(()=>{});
+  });
+
+  heartBtn.addEventListener('click', () => {
+    liked = !liked;
+
+    if(liked){
+      heartBtn.classList.add('active');
+      count++;
+    }else{
+      heartBtn.classList.remove('active');
+      count = Math.max(0, count - 1);
     }
+
+    heartCount.innerText = count;
+
+    // 点击动画
+    heartBtn.animate([
+      { transform: "translate(-50%,-50%) scale(1)" },
+      { transform: "translate(-50%,-50%) scale(1.4)" },
+      { transform: "translate(-50%,-50%) scale(1)" }
+    ], {
+      duration: 250
+    });
   });
 </script>
 
@@ -96,7 +149,7 @@ line-height:1.7;
 margin-top:10px;
 text-align: center;
 ">
-资源群已更新上万部资源 20元群费永久看
+哈哈哈
 </div>
 
 <div style="text-align:center; margin-top:30px;">
@@ -111,7 +164,6 @@ text-align: center;
      font-size:15px;
      font-weight:bold;
      box-shadow: 0 8px 20px rgba(40,167,69,0.4);
-     transition:0.3s;
      ">
      点击进群 →
   </a>
