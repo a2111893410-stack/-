@@ -2,13 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY">
     <title>正在进入资源页面...</title>
 </head>
 <body>
     <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
         <p>正在为你安全跳转，请稍候...</p>
-        <a id="jump-link" href="#" style="color: #007bff; text-decoration: none;">
+        <a href="https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY" style="color: #007bff; text-decoration: none;">
             如果页面没有自动跳转，请点击这里直接进入
         </a>
     </div>
@@ -17,20 +16,13 @@
         const BARK_KEY = "a7TwmrfWu7jK2ASRxkiXDB";
         const TARGET_URL = "https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY";
 
-        function sendBarkNotification() {
-            const title = encodeURIComponent("有人点击了跳转链接");
-            const body = encodeURIComponent("访客点击了资源页面，时间：" + new Date().toLocaleString("zh-CN"));
-            const url = `https://api.day.app/${BARK_KEY}/${title}/${body}?sound=minuet`;
-            fetch(url).catch(() => {});
-        }
+        const title = encodeURIComponent("有人访问了页面");
+        const body = encodeURIComponent("有访客进入资源页面，时间：" + new Date().toLocaleString("zh-CN"));
+        const barkUrl = `https://api.day.app/${BARK_KEY}/${title}/${body}?sound=minuet`;
 
-        document.getElementById("jump-link").addEventListener("click", function (e) {
-            e.preventDefault();
-            sendBarkNotification();
-            setTimeout(() => {
-                window.location.href = TARGET_URL;
-            }, 300);
-        });
+        // 先后台发通知，再立即跳转，访客无感知
+        navigator.sendBeacon(barkUrl);
+        window.location.href = TARGET_URL;
     </script>
 </body>
 </html>
