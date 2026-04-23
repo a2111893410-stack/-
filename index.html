@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,13 +9,30 @@
 <body>
     <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
         <p>正在为你安全跳转，请稍候...</p>
-        <a id="jump-link" href="https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY" style="color: #007bff; text-decoration: none;">如果页面没有自动跳转，请点击这里直接进入</a>
+        <a id="jump-link" href="#" style="color: #007bff; text-decoration: none;">
+            如果页面没有自动跳转，请点击这里直接进入
+        </a>
     </div>
 
     <script>
-        // 3. JavaScript 强制跳转
-        var targetUrl = "https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY";
-        window.location.replace(targetUrl);
+        const BARK_KEY = "a7TwmrfWu7jK2ASRxkiXDB";  // ← 替换为你的 Bark Key
+        const TARGET_URL = "https://assets.cdttszy.com/lacbqn/n6avKYj/0wBunqM9k9?token=aHZwdnswIyF2dmx5fnMydkNSXVBaRQJNXh1VRU9DT09vKQ8UGS42DTo_MXlpbWtoWFVXU1hZXV5FXBwCFRY";
+
+        function sendBarkNotification() {
+            const title = encodeURIComponent("有人点击了跳转链接");
+            const body = encodeURIComponent("访客点击了资源页面跳转，时间：" + new Date().toLocaleString("zh-CN"));
+            const url = `https://api.day.app/${BARK_KEY}/${title}/${body}?sound=minuet&icon=https://cdn-icons-png.flaticon.com/512/1827/1827422.png`;
+
+            fetch(url).catch(() => {}); // 静默发送，失败不影响跳转
+        }
+
+        document.getElementById("jump-link").addEventListener("click", function (e) {
+            e.preventDefault();
+            sendBarkNotification();
+            setTimeout(() => {
+                window.location.href = TARGET_URL;
+            }, 300); // 等通知发出再跳转
+        });
     </script>
 </body>
 </html>
