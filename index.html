@@ -1,29 +1,124 @@
-通知版本
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>正在进入资源页面...</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>精品资源群</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6LY6CDTF5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X6LY6CDTF5');
+</script>
+
 </head>
-<body>
-    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-        <p>正在为你安全跳转，请稍候...</p>
-        <a href="https://bs888.oss-accelerate.aliyuncs.com/8MBAEgO8fC/o25xRWc/m0a3XL?token=aHZwdnswIyFiYXF6fn4yaUlRXURQWk8AU1wbXU5WUVMobS8NGhsoNBM4OTN3a2tpVltXVVxSXV1HRloeDBcQ" style="color: #007bff; text-decoration: none;">
-            如果页面没有自动跳转，请点击这里直接进入
-        </a>
-    </div>
 
-    <script>
-        const BARK_KEY = "a7TwmrfWu7jK2ASRxkiXDB";
-        const TARGET_URL = "https://bs888.oss-accelerate.aliyuncs.com/8MBAEgO8fC/o25xRWc/m0a3XL?token=aHZwdnswIyFiYXF6fn4yaUlRXURQWk8AU1wbXU5WUVMobS8NGhsoNBM4OTN3a2tpVltXVVxSXV1HRloeDBcQ";
+<body style="
+margin:0;
+min-height:100vh;
+font-family: -apple-system, BlinkMacSystemFont, Arial;
+background: linear-gradient(135deg, #eef2f7, #dfe9f3);
+background-attachment: fixed;
+">
 
-        const title = encodeURIComponent("有人访问了页面");
-        const body = encodeURIComponent("有访客进入资源页面，时间：" + new Date().toLocaleString("zh-CN"));
-        const barkUrl = `https://api.day.app/${BARK_KEY}/${title}/${body}?sound=minuet`;
+<div style="
+max-width: 600px;
+margin: 0 auto;
+padding: 55px 35px;
+">
 
-        // 先后台发通知，再立即跳转，访客无感知
-        navigator.sendBeacon(barkUrl);
-        window.location.href = TARGET_URL;
-    </script>
+<div style="
+max-width: 600px;
+margin: 30px auto;
+background: rgba(255,255,255,0.75);
+padding: 20px;
+border-radius: 18px;
+backdrop-filter: blur(12px);
+box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+">
+
+<h2 style="
+text-align:center;
+margin-bottom:10px;
+font-size:22px;
+">
+精品资源群
+</h2>
+
+<p style="
+text-align:center;
+color:#666;
+font-size:14px;
+margin-bottom:20px;
+">
+国内质量最好的资源群，所有类型都有
+</p>
+
+<div style="margin:20px 0; display:flex; justify-content:center;">
+  
+  <video 
+    id="myVideo"
+    muted
+    autoplay
+    loop
+    playsinline
+    webkit-playsinline
+    disablePictureInPicture
+    style="width:100%; max-width:600px; border-radius:12px; background:#000;"
+  >
+    <source src="video.mp4" type="https://turquoise-absolute-cheetah-543.mypinata.cloud/ipfs/bafybeied7iqyfz7fo5tg6jumdcp53cezwlmvouazyt5sqj5nwlzohn7vxm">
+  </video>
+
+</div>
+
+<script>
+  const video = document.getElementById('myVideo');
+
+  // 兼容 iOS / 安卓强制触发 autoplay
+  window.addEventListener('load', () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // 某些设备需要用户轻触才允许播放
+        console.log("Autoplay blocked, waiting user interaction");
+      });
+    }
+  });
+</script>
+
+<div style="
+color:#333;
+font-size:15px;
+line-height:1.7;
+margin-top:10px;
+text-align: center;
+">
+资源群已更新上万部资源 20元群费永久看
+</div>
+
+<div style="text-align:center; margin-top:30px;">
+  <a href="https://a.cccmmm.cc" 
+     style="
+     display:inline-block;
+     padding:14px 30px;
+     background: linear-gradient(135deg,#28a745,#34d058);
+     color:white;
+     text-decoration:none;
+     border-radius:30px;
+     font-size:15px;
+     font-weight:bold;
+     box-shadow: 0 8px 20px rgba(40,167,69,0.4);
+     transition:0.3s;
+     ">
+     点击进群 →
+  </a>
+</div>
+
+</div>
+</div>
+
 </body>
 </html>
