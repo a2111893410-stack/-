@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>请更换浏览器</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body {
+    background:#0a0a0f;
+    font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+    height:100vh; width:100vw;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    color:#fff; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+/* 背景光晕 */
+body::before {
+content:’’;
+position:fixed; inset:0; pointer-events:none;
+background:
+radial-gradient(ellipse 70% 50% at 50% 20%, rgba(254,44,85,0.12) 0%, transparent 65%),
+radial-gradient(ellipse 50% 40% at 80% 80%, rgba(37,244,238,0.07) 0%, transparent 55%);
+}
+
+.card {
+position:relative; z-index:1;
+display:flex; flex-direction:column; align-items:center;
+padding:0 36px; text-align:center;
+animation:fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+from { opacity:0; transform:translateY(20px); }
+to   { opacity:1; transform:translateY(0); }
+}
+
+/* 图标 */
+.icon-wrap {
+width:80px; height:80px; border-radius:22px;
+background:rgba(254,44,85,0.12);
+border:1px solid rgba(254,44,85,0.25);
+display:flex; align-items:center; justify-content:center;
+margin-bottom:28px;
+}
+.icon-wrap svg { width:40px; height:40px; }
+
+.title {
+font-size:20px; font-weight:800; color:#fff;
+line-height:1.4; margin-bottom:14px; letter-spacing:-0.3px;
+}
+
+.desc {
+font-size:14px; color:rgba(255,255,255,0.48);
+line-height:1.75; margin-bottom:32px; max-width:280px;
+}
+
+/* 链接展示框 */
+.url-box {
+width:100%; max-width:310px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.12);
+border-radius:12px;
+padding:12px 16px;
+font-size:14px; color:rgba(255,255,255,0.6);
+letter-spacing:0.3px;
+margin-bottom:14px;
+word-break:break-all;
+}
+
+/* 复制按钮 */
+.copy-btn {
+width:100%; max-width:310px; height:50px;
+background:linear-gradient(130deg,#fe2c55 0%,#ff7070 100%);
+border:none; border-radius:100px;
+color:#fff; font-size:16px; font-weight:700;
+cursor:pointer;
+display:flex; align-items:center; justify-content:center; gap:8px;
+box-shadow:0 8px 26px rgba(254,44,85,0.38);
+position:relative; overflow:hidden;
+-webkit-appearance:none;
+transition:transform 0.15s;
+}
+.copy-btn:active { transform:scale(0.97); }
+.copy-btn::after {
+content:’’; position:absolute; top:0; left:-100%; width:55%; height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+animation:shine 2.5s ease-in-out infinite 0.5s;
+}
+@keyframes shine { 0%{left:-100%} 40%{left:140%} 100%{left:140%} }
+.copy-btn svg { width:17px; height:17px; flex-shrink:0; }
+
+/* 成功提示 */
+#toast {
+position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+background:rgba(0,0,0,0.78); color:#fff;
+font-size:14px; padding:11px 22px;
+border-radius:8px; z-index:9999;
+opacity:0; pointer-events:none;
+transition:opacity 0.22s; white-space:nowrap;
+}
+#toast.show { opacity:1; }
+
+.hint {
+margin-top:20px; font-size:12px;
+color:rgba(255,255,255,0.22); text-align:center; line-height:1.6;
+}
+</style>
+
+</head>
+<body>
+
+<div id="toast"></div>
+
+<div class="card">
+
+  <!-- 手机+浏览器图标 -->
+
+  <div class="icon-wrap">
+    <svg viewBox="0 0 24 24" fill="none" width="40" height="40">
+      <!-- 手机主体 -->
+      <rect x="5" y="2" width="10" height="16" rx="2"
+        stroke="rgba(255,255,255,0.6)" stroke-width="1.6" fill="none"/>
+      <!-- 手机底部圆点 -->
+      <circle cx="10" cy="15.5" r="0.8" fill="rgba(255,255,255,0.5)"/>
+      <!-- 浏览器窗口（右上叠加） -->
+      <rect x="11" y="8" width="10" height="8" rx="1.5"
+        stroke="#fe2c55" stroke-width="1.6" fill="rgba(10,10,15,0.9)"/>
+      <!-- 浏览器顶部栏 -->
+      <line x1="11" y1="11" x2="21" y2="11" stroke="#fe2c55" stroke-width="1.2"/>
+      <!-- 浏览器圆点装饰 -->
+      <circle cx="13" cy="9.5" r="0.6" fill="#fe2c55" opacity="0.8"/>
+      <circle cx="15" cy="9.5" r="0.6" fill="#fe2c55" opacity="0.8"/>
+      <!-- 浏览器内容线条 -->
+      <line x1="13" y1="13" x2="19" y2="13" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="13" y1="14.5" x2="17" y2="14.5" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="title">该网站不支持<br>QQ浏览器观看</div>
+  <div class="desc">请复制下方链接，粘贴到 Safari、Chrome 或其他浏览器中打开</div>
+
+  <!-- 链接展示 -->
+
+  <div class="url-box" id="urlText">cccmmm.cc</div>
+
+  <!-- 复制按钮：JS 跳转，不用 href -->
+
+  <button class="copy-btn" onclick="copyLink()">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+    </svg>
+    复制链接
+  </button>
+
+  <div class="hint">复制后打开其他浏览器 → 粘贴到地址栏 → 回车访问</div>
+
+</div>
+
+<script>
+var SITE_URL = 'https://cccmmm.cc';
+
+/* 复制链接 */
+function copyLink() {
+  /* 优先用现代 Clipboard API */
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(SITE_URL).then(function() {
+      showToast('链接已复制 ✓');
+    }).catch(function() {
+      fallbackCopy();
+    });
+  } else {
+    fallbackCopy();
+  }
+}
+
+/* 兼容旧版浏览器的复制方案 */
+function fallbackCopy() {
+  var el = document.createElement('textarea');
+  el.value = SITE_URL;
+  el.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+  document.body.appendChild(el);
+  el.focus();
+  el.select();
+  try {
+    document.execCommand('copy');
+    showToast('链接已复制 ✓');
+  } catch(e) {
+    showToast('请手动长按链接复制');
+  }
+  document.body.removeChild(el);
+}
+
+var toastTimer;
+function showToast(text) {
+  var t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2000);
+}
+</script>
+
+</body>
+</html>
